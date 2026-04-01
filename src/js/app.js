@@ -33,6 +33,7 @@ class App {
         this.ttsEnabled = false;  // TTS runtime toggle
         this.isPinned = true;     // Always-on-top state
         this.isCompact = false;   // Compact mode (hide control bar)
+        this.isTransparent = false; // Transparent mode (watch video while reading)
     }
 
     async init() {
@@ -170,6 +171,11 @@ class App {
         // Compact mode button
         document.getElementById('btn-compact').addEventListener('click', () => {
             this._toggleCompact();
+        });
+
+        // Transparent mode button
+        document.getElementById('btn-transparent')?.addEventListener('click', () => {
+            this._toggleTransparent();
         });
 
         // View mode toggle (dual panel)
@@ -509,6 +515,12 @@ class App {
             if ((e.metaKey || e.ctrlKey) && e.key === 'd') {
                 e.preventDefault();
                 this._toggleCompact();
+            }
+
+            // Cmd/Ctrl + E: Toggle Transparent mode
+            if ((e.metaKey || e.ctrlKey) && e.key === 'e') {
+                e.preventDefault();
+                this._toggleTransparent();
             }
         });
     }
